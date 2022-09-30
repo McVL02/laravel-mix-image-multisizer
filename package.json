@@ -8,15 +8,15 @@
     "url": "https://github.com/TristanMouchet/laravel-mix-simple-image-processing.git"
   },
   "dependencies": {
-    "fs-extra": "^8.1.0",
-    "glob": "^7.1.6",
-    "image-size": "^0.8.3",
-    "imagemin": "^7.0.1",
-    "imagemin-jpegtran": "^6.0.0",
-    "imagemin-pngquant": "^8.0.0",
-    "imagemin-webp": "^5.1.0",
+    "fs-extra": "^10.1.0",
+    "glob": "^8.0.3",
+    "image-size": "^1.0.2",
+    "imagemin": "^8.0.1",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-pngquant": "^9.0.0",
+    "imagemin-webp": "^7.0.0",
     "path": "^0.12.7",
-    "sharp": "^0.29.3"
+    "sharp": "^0.31.1"
   },
   "scripts": {
     "test": "echo \"No test specified\" && exit 0"
