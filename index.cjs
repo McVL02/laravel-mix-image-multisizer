@@ -1,4 +1,5 @@
-const mix = require('laravel-mix')
-import {SimpleImageProcessor} from './index.js'
+const req = require('require-esm-in-cjs');
+const mix = require('laravel-mix');
+const SimpleImageProcessor = req('./index.js');
 
-mix.extend('imgs', new SimpleImageProcessor())
+mix.extend('imgs', new SimpleImageProcessor());
