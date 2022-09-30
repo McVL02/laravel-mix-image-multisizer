@@ -2,7 +2,8 @@
   "name": "laravel-mix-simple-image-processing",
   "version": "1.0.7",
   "description": "A simple laravel mix plugin to copy/minify/resize images",
-  "main": "index.js",
+  "main": "index.cjs",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/TristanMouchet/laravel-mix-simple-image-processing.git"

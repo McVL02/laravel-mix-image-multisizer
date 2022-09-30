@@ -1,17 +1,16 @@
-const mix = require('laravel-mix')
 const fs = require('fs-extra')
 const path = require('path')
 const glob = require('glob')
 const sharp = require('sharp')
 const imageSize = require('image-size')
-const imagemin = require('imagemin')
+import imagemin from 'imagemin';
 const imageminJpegtran = require('imagemin-jpegtran')
 const imageminPngquant = require('imagemin-pngquant')
-const imageminWebp = require('imagemin-webp')
+const imageminWebp = import('imagemin-webp')
 
-class SimpleImageProcessor {
+export default class SimpleImageProcessor {
     register(options = {}) {
-        let {
+            let {
             disable,
             source,
             destination,
@@ -51,7 +50,7 @@ class SimpleImageProcessor {
 
         let warnings = false;
 
-        glob.sync(source + '/**/*').forEach((fromImagePath) => {
+        glob.sync(source + '/**/*').forEach(async (fromImagePath) => {
             if (fromImagePath.match(/\.(jpe?g|png|gif)$/i) === null) {
                 return
             }
@@ -108,7 +107,7 @@ class SimpleImageProcessor {
                 files.push(destinationFolder + name + ext) // Full sized images
             }
 
-            imagemin(files, {
+            await imagemin(files, {
                 destination: destinationFolder,
                 plugins: [
                     imageminJpegtran(),
@@ -117,7 +116,7 @@ class SimpleImageProcessor {
             })
 
             if (webp) {
-                imagemin(files, {
+                await imagemin(files, {
                     destination: destinationFolder,
                     plugins: [
                         imageminWebp(imageminWebpOptions)
@@ -132,4 +131,4 @@ class SimpleImageProcessor {
     }
 }
 
-mix.extend('imgs', new SimpleImageProcessor())
+
