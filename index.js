@@ -64,19 +64,40 @@ class SimpleImageProcessor {
                 fs.mkdirSync(destinationFolder);
             }
 
+            var sizename;
+            var h;
             thumbnailsSizes.forEach((w) => {
+                sizename = w;
+                h = 0;
+                if (Array.isArray(w)) {
+
+                    if (w.length == 2) {
+                        h = w[1];
+                        w = w[0];
+                        sizename = w + 'x' + h;
+                    } else if (w.length == 1) {
+                        w = w[0];
+                    } else {
+                        new Error('thumbnail size must be either an integer or an array of 2 integers')
+                    }
+                }
+
                 if (width < w) {
                     if (smallerThumbnailsOnly) {
                         return
                     } else {
                         warnings = true;
                         console.warn('mix.imgs() '+"\x1b[33m"+'WARN'+"\x1b[0m"+' Image "'+fromImagePath+'" (width: '+width+'px) is generating a thumbnail "'+destinationFolder+name+thumbnailsSuffix+w+ext+'" with a stretched resolution.')
-                    } 
+                    }
                 }
 
-                sharp(fromImagePath)
-                    .resize(w)
-                    .toFile(destinationFolder + name + thumbnailsSuffix + w + ext)
+                var sharpImg = sharp(fromImagePath);
+
+                h === 0 ?
+                    sharpImg.resize(w) :
+                    sharpImg.resize(w,h);
+
+                sharpImg.toFile(destinationFolder + name + thumbnailsSuffix + sizename + ext);
             })
 
             let files = [
