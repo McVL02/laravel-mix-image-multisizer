@@ -3,12 +3,10 @@ const path = require('path')
 const glob = require('glob')
 const sharp = require('sharp')
 const imageSize = require('image-size')
-import imagemin from 'imagemin';
 const imageminJpegtran = require('imagemin-jpegtran')
 const imageminPngquant = require('imagemin-pngquant')
-const imageminWebp = import('imagemin-webp')
 
-export default class SimpleImageProcessor {
+module.exports = class SimpleImageProcessor {
     register(options = {}) {
             let {
             disable,
@@ -107,22 +105,26 @@ export default class SimpleImageProcessor {
                 files.push(destinationFolder + name + ext) // Full sized images
             }
 
-            await imagemin(files, {
-                destination: destinationFolder,
-                plugins: [
-                    imageminJpegtran(),
-                    imageminPngquant(imageminPngquantOptions),
-                ],
-            })
-
-            if (webp) {
+            (async () => {
+                const imagemin = (await import('imagemin')).default
                 await imagemin(files, {
                     destination: destinationFolder,
                     plugins: [
-                        imageminWebp(imageminWebpOptions)
+                        imageminJpegtran(),
+                        imageminPngquant(imageminPngquantOptions),
                     ],
                 })
-            }
+
+                if (webp) {
+                    const imageminWebp = (await import('imagemin-webp')).default
+                    await imagemin(files, {
+                        destination: destinationFolder,
+                        plugins: [
+                            imageminWebp(imageminWebpOptions)
+                        ],
+                    })
+                }
+            })()
         })
 
         if (warnings) {

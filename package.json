@@ -1,12 +1,12 @@
 {
-  "name": "laravel-mix-simple-image-processing",
-  "version": "1.0.9",
+  "name": "laravel-mix-image-multisizer",
+  "version": "0.1.0",
   "description": "A simple laravel mix plugin to copy/minify/resize images",
   "main": "index.cjs",
-  "type": "module",
+  "type": "commonjs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/TristanMouchet/laravel-mix-simple-image-processing.git"
+    "url": "https://github.com/McVL02/laravel-mix-simple-image-processing.git"
   },
   "dependencies": {
     "fs-extra": "^10.1.0",
@@ -17,11 +17,13 @@
     "imagemin-pngquant": "^9.0.0",
     "imagemin-webp": "^7.0.0",
     "path": "^0.12.7",
-    "require-esm-in-cjs": "^0.1.0",
     "sharp": "^0.31.1"
   },
+  "devDependencies": {
+    "laravel-mix": "^6.0.49"
+  },
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "node test.cjs"
   },
   "keywords": [
     "image",
@@ -32,6 +34,10 @@
     "minify",
     "optimize"
   ],
-  "author": "Tristan Mouchet",
-  "license": "ISC"
+  "author": "Marc Vlendré",
+  "contributors": [
+    "Tristan Mouchet",
+    "Ryota Moriyama"
+  ],
+  "license": "MIT"
 }
