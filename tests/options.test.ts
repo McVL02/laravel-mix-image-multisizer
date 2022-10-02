@@ -32,6 +32,7 @@ describe('input options tests', () => {
     test('if disabled, return void', () => {
         const options = {
             disabled: true,
+            thumbnailsSizes: [0],
         };
         let tester = new MixImageProcessor();
         expect(tester.register(options)).toBeUndefined()

@@ -7,6 +7,7 @@ export interface Image {
     readonly fullname: string,
     readonly extension: string,
     readonly path: string,
+    readonly fullpath: string,
     readonly width: number,
     readonly height: number,
 }
@@ -28,6 +29,7 @@ export function getImages(source: string, allowedTypes = ['jpe?g', 'png', 'gif']
             fullname: base,
             extension: ext,
             path: dir,
+            fullpath: dir + '/' + base,
             width: width,
             height: height
         });

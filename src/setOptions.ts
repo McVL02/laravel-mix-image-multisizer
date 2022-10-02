@@ -6,19 +6,17 @@ export interface Options {
     readonly thumbnailsSuffix: string,
     readonly thumbnailsOnly: boolean,
     readonly smallerThumbnailsOnly: boolean,
-    readonly webp: boolean,
 };
 
 export function setOptions(options?: Partial<Options>): Options {
     const defaults: Options = {
         disabled: false,
-        source: 'resources/images',
-        destination: 'public/images',
+        source: 'resources/images/',
+        destination: 'public/images/',
         thumbnailsSizes: [],
         thumbnailsSuffix: '@',
-        thumbnailsOnly: false,
+        thumbnailsOnly: true,
         smallerThumbnailsOnly: false,
-        webp: false,
     };
   
     let squasedOptions =  {
