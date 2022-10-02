@@ -38,22 +38,90 @@ Note: when running `npm run watch` the module is only executed once at the begin
 
 
 ## Options
-
 Here is the list of available options when passing an object to the mix.imgs() method:
+- [disabled](#disabled)
+- [source](#source)
+- [destination](#destination)
+- [thumbnailsSizes](#thumbnailsSizes)
+- [thumbnailsSuffix](#thumbnailsSuffix)
+- [thumbnailsOnly](#thumbnailsOnly)
+- [smallerThumbnailsOnly](#smallerThumbnailsOnly)
+### disabled
+Wether to disable the execution of the plugin or not, can be used to disable the execution on specific environnements.
+```ts
+disabled <boolean>: false
+```
+### source
+Path to the folder containing the images that will be used as input of the processing functions (images in sub-folders are also included).
+```ts
+source <string>: 'resources/images'
+```
+### destination
+Path to the folder where the images will be saved (with source-like sub-folders).
+```ts
+destination <string>: 'public/images'
+```
+### thumbnailsSizes
+A list of values (in pixels) related to the sizes of the thumbnails
+- 1D list: a list of widths `[w]`. The corresponding heights is calculated proportionally
+- 2D list: a list of widths and heights `[w, h]`
+```ts
+thumbnailsSizes <Array[number] or Array[number, number]>: []
+```
+### thumbnailsSuffix
+Suffix to be used for thumbnail names, the thumbnail names are based on the template `{name}{suffix}{size}.{img-extension}`, for example `image.jpg` could generate a thumbnail named the following names, based on the dimensions of the [thumbnailsSizes](#thumbnailsSizes)
+- 1D: `image@300.jpg`
+- 2D: `image@300x400.jpg`
+```ts
+thumbnailsSuffix <string>: '@'
+```
+### thumbnailsOnly
+Wether to copy or not the original (full-sized) pictures to the destination folder. The full-sized pictures will be optimized in the destination folder. This option is useful if you only want to generate thumbnails without copying/optimizing the full-sized pictures.
+```ts
+thumbnailsOnly <boolean>: true
+```
+### smallerThumbnailsOnly
+Whether to resize images to only sizes below their native width.
+```ts
+smallerThumbnailsOnly <boolean>: false
+```
+## Constants
+PWA_ICONSTHUMBNAILSIZES:
+```js
+// Import in your webpack.mix.js file
+const PWA_ICONSTHUMBNAILSIZES = require('laravel-mix-image-multisizer').PWA_ICONSTHUMBNAILSIZES;
 
-| Option | Type | Default value | Description |
-| --- | --- | --- | --- |
-| disable | Boolean | `false` | Wether to disable the execution of the plugin or not, can be used to disable the execution on specific environnements. |
-| source | String | `'resources/images'` | Path to the folder containing the images that will be used as input of the processing functions (images in sub-folders are also included). |
-| destination | String | `'public/images'` | Path to the folder where the images will be saved (with source-like sub-folders). |
-| thumbnailsSizes | Array[Int] or 2D Array[Int] | `[]` | A list of maximum-width (in pixel) thumbnail to generate. E.g. `[300, 600]` would generate 2 thumbnails for each image processed, one with a 300px width and one with a 600px width. The height of the images are calculated proportionally. The plugin will emit a warning for each value superior at the width of the source image. E.g. [[300, 600], [600, 900]] will create 2 images. One with the size 300x600 and one with the size 600x900.|
-| thumbnailsSuffix | String | `'@'` | Suffix to be used for thumbnail names, the thumbnail names are based on the template `{img-name}{suffix}{width}.{img-extension}`, for example `image.jpg` could generate a thumbnail named `image@300.jpg`. |
-| thumbnailsOnly | Boolean | `false` | Wether to copy or not the original (full-sized) pictures to the destination folder. The full-sized pictures will be optimized in the destination folder. This option is useful if you only want to generate thumbnails without copying/optimizing the full-sized pictures. |
-| smallerThumbnailsOnly | Boolean | `false` | Whether to resize images to only sizes below their native width. |
-| webp | Boolean | `false` | Wether to generate WebP images. An image with the WebP format will be generated for each picture processed in the destination folder (including for all thumbnails). |
-| imageminPngquantOptions | Object | `{ quality: [0.3, 0.5] }` | Options to pass to the [imageminPngquant](https://github.com/imagemin/imagemin-pngquant#api) plugin. |
-| imageminWebpOptions | Object | `{ quality: 50 }` | Options to pass to the [imageminWebp](https://github.com/imagemin/imagemin-webp#api) plugin. |
+// Definition
+export const PWA_ICONSTHUMBNAILSIZES = [
+    [72,72],
+    [96,96],
+    [128,128],
+    [144,144],
+    [152,152],
+    [192,192],
+    [384,384],
+    [512,512]
+];
+```
+PWA_SPLASHTHUMBNAILSIZES:
+```js
+// Import in your webpack.mix.js file
+const PWA_ICONSTHUMBNAILSIZES = require('laravel-mix-image-multisizer').PWA_ICONSTHUMBNAILSIZES;
 
+// Definition
+export const PWA_ICONSTHUMBNAILSIZES = [
+    [640, 1136],
+    [750, 1334],
+    [828, 1792],
+    [1125, 2436],
+    [1242, 2208],
+    [1242, 2688],
+    [1536, 2048],
+    [1668, 2224],
+    [1668, 2388],
+    [2048, 2732]
+];
+```
 
 ## Examples
 
@@ -83,7 +151,7 @@ mix.imgs({
 })
 ```
 
-## Exported constants
+Use exported constants:
 ```js
 const mix = require('laravel-mix');
 const PWA_ICONSTHUMBNAILSIZES = require('laravel-mix-image-multisizer').PWA_ICONSTHUMBNAILSIZES;
@@ -103,6 +171,4 @@ mix.imgs({
     thumbnailsSizes: PWA_SPLASHTHUMBNAILSIZES,
 });
 ```
-**PWA_ICONSTHUMBNAILSIZES: (8)** `72x72`, `96,96`, `128,128`, `144x144`, `152x152`, `192x192`, `384x384` and `512x512`
-**PWA_ICONSTHUMBNAILSIZES: (10)** `640x1136`, `750x1334`, `828x1792`, `1125x2436`, `1242x2208`, `1242x2688`, `1536x2048`, `1668x2224`, `1668x2388` and `2048x2732`
 
