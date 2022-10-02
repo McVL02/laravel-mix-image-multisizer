@@ -1,16 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.MixImageProcessor = void 0;
 var setOptions_1 = require("./setOptions");
-var fs = require('fs');
-var test = (0, setOptions_1.setOptions)({
-    thumbnailsSizes: [
-        [1536, 2048],
-        [1242, 2688],
-        [1242, 2208],
-        [2208, 1242],
-    ],
-    disabled: true,
-});
+var getImages_1 = require("./getImages");
+var processImage_1 = require("./processImage");
 var MixImageProcessor = /** @class */ (function () {
     function MixImageProcessor() {
     }
@@ -19,12 +12,11 @@ var MixImageProcessor = /** @class */ (function () {
         var options = (0, setOptions_1.setOptions)(input);
         if (options.disabled)
             return;
-        if (!options.thumbnailsOnly)
-            fs.copySync(options.source, options.destination);
-        var warnings = false;
+        var images = (0, getImages_1.getImages)(options.source);
+        images.forEach(function (image) { return (0, processImage_1.process)(image, options); });
     };
     ;
     return MixImageProcessor;
 }());
-console.log(test);
+exports.MixImageProcessor = MixImageProcessor;
 //# sourceMappingURL=MixImageProcessor.js.map

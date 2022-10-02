@@ -16,13 +16,12 @@ exports.setOptions = void 0;
 function setOptions(options) {
     var defaults = {
         disabled: false,
-        source: 'resources/images',
-        destination: 'public/images',
+        source: 'resources/images/',
+        destination: 'public/images/',
         thumbnailsSizes: [],
         thumbnailsSuffix: '@',
-        thumbnailsOnly: false,
+        thumbnailsOnly: true,
         smallerThumbnailsOnly: false,
-        webp: false,
     };
     var squasedOptions = __assign(__assign({}, defaults), options);
     squasedOptions.thumbnailsSizes.sort(function (a, b) { return (a > b) ? 1 : -1; });
