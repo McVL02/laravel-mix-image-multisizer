@@ -4,3 +4,4 @@ node_modules
 test-files
 debug.log
 test.*
+.github
