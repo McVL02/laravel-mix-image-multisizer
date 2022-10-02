@@ -1,9 +1,9 @@
-const mix = require('laravel-mix');
-const SimpleImageProcessor = require('./SimpleImageProcessor.cjs');
+import { MixImageProcessor } from './MixImageProcessor';
+import mix = require('laravel-mix');
 
-mix.extend('imgs', new SimpleImageProcessor());
+mix.extend('imgs', new MixImageProcessor());
 
-exports.PWA_ICONSTHUMBNAILSIZES = [
+export const PWA_ICONSTHUMBNAILSIZES = [
     [72,72],
     [96,96],
     [128,128],
@@ -14,7 +14,7 @@ exports.PWA_ICONSTHUMBNAILSIZES = [
     [512,512]
 ];
 
-exports.PWA_SPLASHTHUMBNAILSIZES = [
+export const PWA_SPLASHTHUMBNAILSIZES = [
     [640, 1136],
     [750, 1334],
     [828, 1792],
@@ -24,5 +24,5 @@ exports.PWA_SPLASHTHUMBNAILSIZES = [
     [1536, 2048],
     [1668, 2224],
     [1668, 2388],
-    [2048, 2732],
+    [2048, 2732]
 ];

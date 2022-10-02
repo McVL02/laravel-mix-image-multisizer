@@ -1,7 +1,9 @@
 node_modules
 .vscode
-.test-output
-test-files
-debug.log
-test.*
 .github
+tsconfig.json
+
+# Testing
+tests
+.test-output
+jest.config.js
