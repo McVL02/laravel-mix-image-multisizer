@@ -1,6 +1,6 @@
 {
   "name": "laravel-mix-image-multisizer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A simple laravel mix plugin to copy/minify/resize images",
   "main": "index.cjs",
   "type": "commonjs",
