@@ -1,6 +1,8 @@
 node_modules
 .vscode
-.test-output
-debug.log
-tests
 tsconfig.json
+
+# Testing
+tests
+.test-output
+jest.config.js
