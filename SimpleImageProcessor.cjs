@@ -106,23 +106,32 @@ module.exports = class SimpleImageProcessor {
             }
 
             (async () => {
-                const imagemin = (await import('imagemin')).default
-                await imagemin(files, {
-                    destination: destinationFolder,
-                    plugins: [
-                        imageminJpegtran(),
-                        imageminPngquant(imageminPngquantOptions),
-                    ],
-                })
-
-                if (webp) {
-                    const imageminWebp = (await import('imagemin-webp')).default
+                try {
+                    const imagemin = (await import('imagemin')).default
                     await imagemin(files, {
                         destination: destinationFolder,
                         plugins: [
-                            imageminWebp(imageminWebpOptions)
+                            imageminJpegtran(),
+                            imageminPngquant(imageminPngquantOptions),
                         ],
                     })
+
+                    if (webp) {
+                        const imageminWebp = (await import('imagemin-webp')).default
+                        await imagemin(files, {
+                            destination: destinationFolder,
+                            plugins: [
+                                imageminWebp(imageminWebpOptions)
+                            ],
+                        })
+                    }
+                } catch (error) {
+                    var fs = require('fs');
+                    var util = require('util');
+                    var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
+
+                    log_file.write(util.format(error) + '\n');
+                    console.error(error)
                 }
             })()
         })

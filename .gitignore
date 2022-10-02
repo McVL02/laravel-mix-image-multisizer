@@ -2,3 +2,4 @@ node_modules
 .vscode
 .test-output
 *.code-workspace
+debug.log
