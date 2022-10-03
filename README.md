@@ -136,7 +136,7 @@ mix.imgs({
 Process images in all environnements EXCEPT for 'production':
 ```js
 mix.imgs({
-    disable: process.env.NODE_ENV === 'production',
+    disabled: process.env.NODE_ENV === 'production',
     // ...
 })
 ```
@@ -147,7 +147,7 @@ mix.imgs({
     source: 'resources/images/photos',
     destination: 'public/images/photos/thumbnails',
     thumbnailsSizes: [300, 600], // Generate thumbnails with 300px and 600px width.
-    thumbnailsOnly: true, // Do not copy the original (full-sized) images over.
+    thumbnailsOnly: false, // Copy the original (full-sized) images over.
 })
 ```
 
